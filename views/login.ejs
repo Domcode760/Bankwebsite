@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Welcome to the X Bank</h1>
+    <form action="/login" method="post">
+        <label>Username:</label>
+        <input name="username" value="<%= username ? username : '' %>">
+        <label>Password:</label>
+        <input name="password">
+        <% if(errors.length > 0) { %>
+            <ul>
+                <% errors.forEach(err => { %>
+                    <li> <%= err %> </li>
+                <% }) %>
+            </ul>
+        <% } %>
+        <button type="submit">Login</button>
+    </form>
+    
+</body>
+</html>

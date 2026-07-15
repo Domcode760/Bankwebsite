@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+
+    <a class="home-button" href="/index">
+        <i class="fa-solid fa-house"></i>
+        Home
+    </a>
+
+        <h1> ATM</h1>
+            <form action="/atm" method="get">
+                
+                <select name="selectedId">
+                    <% bankAccounts.forEach(account => { %>
+                        <option value="<%= account.bank_account_id %>" <%= selectedId == account.bank_account_id ? "selected" : "" %> >Konto: <%= account.bank_account_id %></option>
+                    <% }) %>
+                </select>
+                
+                <p> </p>
+                <% if(!type) { %> <button type="submit" name="type" value="withdraw">Withdraw</button> <% } %>
+                <% if(!type) { %> <button type="submit" name="type" value="deposit">Deposit</button><% } %>
+
+            </form>
+
+            <% if(type) { %> 
+                <form action="/atm/transaction" method="post">
+                    <h3><%= typeof type !== 'undefined' ? type.charAt(0).toUpperCase() + type.slice(1)  : '' %></h3>
+
+                    <input type="hidden" name="selectedId" value="<%= selectedId %>">
+
+                    <label>Amount:</label>
+                    <input name="amount">
+                    <button type="submit" name="type" value="<%= type %>">Submit</button>
+                </form>
+
+                <button onclick="window.location.href='/atm'">Back</button>
+            <% } %>
+
+            <%- include("partials/messages") %>
+        </div>
+</body>
+</html>

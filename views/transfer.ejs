@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <a class="home-button" href="/index">
+            <i class="fa-solid fa-house"></i>
+            Home
+        </a>
+
+        <h1>Transfer</h1>
+
+        <form action="/transfer" method="post">
+            
+            <select name="selectedAccount">
+                <% bankAccounts.forEach(acc => { %>
+                    <option value="<%= acc.bank_account_id %>" <%= selectedAccount === acc.bank_account_id ? "selected" : "" %> > Konto: <%= acc.bank_account_id %> </option>
+                <% }) %>
+            </select>
+            =>
+            <label>Receiving Account: </label>
+            <input name="toAccount">
+            <p></p>
+            <label>Amount: </label>
+            <input name="amount">
+
+            <p></p>
+        
+            <button type="submit">Submit</button>
+
+            <%- include("partials/messages") %>
+
+        </form>
+    </div>
+</body>
+</html>

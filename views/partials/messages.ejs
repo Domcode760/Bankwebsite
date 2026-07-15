@@ -1,0 +1,15 @@
+<% if(errors.length > 0) { %>
+    <ul>
+        <% errors.forEach(err => { %>
+            <li> <%= err %> </li>
+        <% }) %>
+    </ul>
+<% } %>
+
+<% if(success.length > 0) { %>
+    <ul>
+        <% success.forEach(msg => { %>
+                <li> <%= msg %> </li>
+        <% }) %>
+    </ul>
+<% } %>

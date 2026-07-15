@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <a class="home-button" href="/index">
+            <i class="fa-solid fa-house"></i>
+            Home
+        </a> 
+
+        <h1>Transactions</h1>
+
+        <form action="/transactions" method="get">
+
+            <select name="accountID" onchange="this.form.submit()">
+                <option value="" <%= !selectedAccount ? "selected" : "" %> >All accounts</option>
+                <% bankAccounts.forEach(acc => { %>
+                    <option value="<%= acc.bank_account_id %>" <%= selectedAccount == acc.bank_account_id ? "selected" : "" %> >Konto: <%= acc.bank_account_id %></option>
+                <% }) %>
+            </select>
+
+            <table>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>From Account</th>
+                    <th>To Account</th>
+                    <th>Amount</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                </tr>
+                <% transactions.forEach(transaction => { %>
+                    <tr>
+                        <td><%= transaction.transaction_id %></td>
+                        <td><%= transaction.from_account %></td>
+                        <td><%= transaction.to_account %></td>
+                        <td><%= transaction.amount %></td>
+                        <td><%= transaction.type %></td>
+                        <td><%= transaction.status %></td>
+                        <td><%= transaction.created_at %></td>
+                    </tr>
+                <% }) %>
+            </table>
+        </from>
+
+        <% if(errors.length > 0) { %>
+            <ul>
+                <% errors.forEach(err => { %>
+                    <li> <%= err %> </li>
+                <% }) %>
+            </ul>
+        <% } %>
+
+    </div>
+</body>
+</html>
